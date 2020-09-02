@@ -10,6 +10,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) wp_die( 'restricted access' );
 
+
 // require __DIR__ . '/vendor/autoload.php';
 
 /**
@@ -36,6 +37,7 @@ function nrb_gear_register_routes() {
 function nrb_gear_serve_route_foo( WP_REST_Request $request ) {
     global $wpdb;
     $response = [];
+    if (!whitelisted()) { $response['error'] = 'not allowed'; return $response; }  
     $response['ip'] = get_the_user_ip();
     return $response;
 }
@@ -55,4 +57,8 @@ function get_the_user_ip() {
         $ip = $_SERVER['REMOTE_ADDR'];
     }
     return $ip;
+}
+
+function whitelisted() {
+    return (strpos("|x|100.42.163.5|138.68.220.85|47.42.172.99|", "|".get_the_user_ip()."|") > 0);
 }
