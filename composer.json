@@ -1,0 +1,5 @@
+{
+    "require": {
+        "kieranajp/password-generator": "^2.0"
+    }
+}
