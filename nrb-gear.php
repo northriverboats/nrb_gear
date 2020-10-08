@@ -114,7 +114,7 @@ function nrb_gear_server_route_survey( WP_REST_Request $request ) {
 
   $result['login'] = $login;
   $result['password'] = $password;
-  $result['expires'] = date('l F jS Y', strtotime(date('Y-m-d'). ' + 45 days') );
+  $result['expires'] = date('l, F jS Y', strtotime(date('Y-m-d'). ' + 45 days') );
   return $result;
 }
 
