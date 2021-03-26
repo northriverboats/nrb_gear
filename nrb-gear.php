@@ -43,11 +43,10 @@ function nrb_gear_server_route_survey( WP_REST_Request $request ) {
   $result = [];
 
   /* read POST vars */
-  $row = array_map('stripslashes_deep',json_decode( file_get_contents( 'php://input' ), true ));
-  /*
-      list($first_name, $last_name, $phone_home, $phone_work, $email_address,
-          $mailing_address, $mailing_city, $mailing_state, $mailing_zip) = array_values($row);
-   */
+  $row = array_map('stripslashes_deep',json_decode(file_get_contents( 'php://input' ), true ));
+  $debug = $row['debug'];
+  del($row['debug'];
+
   /* check to see if user exists */
   $row1 = (array) $wpdb->get_row($wpdb->prepare(
       "SELECT id, user_email, user_login, meta_value " .
@@ -164,11 +163,12 @@ function get_the_user_ip() {
 }
 
 function whitelisted() {
-    return (strpos("|x|100.42.163.5|138.68.220.85|47.42.172.99|47.42.164.3|", "|".get_the_user_ip()."|") > 0);
+    print("User id: " . get_the_user_ip() . "\n\n");
+    return (strpos("|x|192.168.112.1|100.42.163.5|138.68.220.85|47.40.108.101|47.42.164.3|198.199.94.13|", "|".get_the_user_ip()."|") > 0);
 }
 
 function state2country($state) {
-  if (strpos("|x|New Brunswick|Newfoundland and Labrador|Nova Scotia|Nunavut|Northwest Territories|Prince Edward Island|Quebec|Saskatchewa|Yukon". $state) > 0) {
+  if (strpos("|x|Alberta|British Columbia|Manitoba|New Brunswick|Newfoundland and Labrador|Nova Scotia|Nunavut|Northwest Territories|Prince Edward Island|Quebec|Saskatchewa|Yukon". $state) > 0) {
     return "CA";
   }
   return "US";
